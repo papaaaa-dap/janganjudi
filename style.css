@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+
+body {
+    background: radial-gradient(circle at center, #35155D 0%, #150524 80%, #000000 100%);
+    color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    overflow-x: hidden; /* Biar koin gak bikin scroll horizontal */
+}
+
+.screen { display: none; width: 100%; max-width: 1100px; padding: 20px; }
+.screen.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+
+/* Login Box */
+.login-box {
+    background: rgba(20, 10, 35, 0.85); backdrop-filter: blur(10px); padding: 50px;
+    border-radius: 25px; border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,215,0,0.1);
+    text-align: center; max-width: 450px; margin: 0 auto;
+}
+.login-box h1 { color: #FFCC00; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); }
+.login-box p { color: #bbb; margin-bottom: 30px; }
+.input-group { margin: 25px 0; text-align: left; }
+.input-group label { display: block; margin-bottom: 10px; color: #ddd; font-weight: bold; }
+.input-group input, .input-group select { 
+    width: 100%; padding: 18px; border-radius: 12px; border: 2px solid #5A2A82; 
+    background: rgba(0,0,0,0.5); color: #fff; font-size: 1.2rem; font-weight: bold; outline: none; transition: border 0.3s;
+}
+.input-group input:focus, .input-group select:focus { border-color: #FFCC00; }
+
+/* Tombol 3D */
+.btn-3d { border: none; border-radius: 15px; cursor: pointer; font-weight: 900; text-transform: uppercase; transition: all 0.1s; outline: none; }
+.btn-primary { width: 100%; padding: 20px; font-size: 1.2rem; background: linear-gradient(to bottom, #FF416C, #FF4B2B); color: white; box-shadow: 0 8px 0 #900C3F, 0 15px 20px rgba(255, 65, 108, 0.4); }
+.btn-primary:active { transform: translateY(8px); box-shadow: 0 0 0 #900C3F; }
+.btn-secondary { padding: 0 25px; height: 100%; font-size: 1rem; background: linear-gradient(to bottom, #8E2DE2, #4A00E0); color: white; box-shadow: 0 6px 0 #31008C; border-radius: 12px; }
+.btn-secondary:active { transform: translateY(6px); box-shadow: 0 0 0 #31008C; }
+.btn-spin-action { width: 100%; padding: 25px; font-size: 2.2rem; background: linear-gradient(to bottom, #56AB2F, #A8E063); color: #0b3f0b; box-shadow: 0 10px 0 #2b6118, 0 20px 30px rgba(86, 171, 47, 0.5); margin-top: 20px; }
+.btn-spin-action:active { transform: translateY(10px); box-shadow: 0 0 0 #2b6118; }
+.btn-spin-action:disabled { filter: grayscale(100%); cursor: not-allowed; box-shadow: none; transform: translateY(10px); }
+
+/* Game HUD */
+.header { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.6); padding: 20px 30px; border-radius: 15px; margin-bottom: 20px; border-bottom: 3px solid #FFCC00; font-size: 1.5rem; font-weight: 800; }
+.glow-text { color: #FFCC00; text-shadow: 0 0 15px rgba(255, 204, 0, 0.8); }
+.machine-container { background: linear-gradient(180deg, #2b113d, #0d0414); padding: 30px; border-radius: 25px; border: 6px solid #4A00E0; box-shadow: 0 0 50px rgba(74, 0, 224, 0.4), inset 0 0 30px rgba(0,0,0,1); position: relative; max-width: 900px; margin: 0 auto; }
+
+/* Grid 5x6 */
+.slot-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(5, 1fr); gap: 12px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 15px; margin-bottom: 25px; box-shadow: inset 0 10px 20px rgba(0,0,0,1); }
+.slot-cell { background: linear-gradient(145deg, #ffffff, #e0e0e0); font-size: 65px; display: flex; justify-content: center; align-items: center; border-radius: 12px; height: 95px; box-shadow: 0 6px 0 #cccccc, inset 0 -5px 10px rgba(0,0,0,0.1); transition: transform 0.2s; user-select: none; }
+.slot-cell.win-pop { transform: scale(1.1) translateY(-5px); background: linear-gradient(145deg, #FFF5C3, #FFCC00); box-shadow: 0 8px 0 #B8860B, 0 0 30px #FFCC00; z-index: 2; animation: pulseWin 0.8s infinite alternate; }
+.message-board { background: rgba(0,0,0,0.6); padding: 20px; text-align: center; border-radius: 12px; border: 2px solid #8E2DE2; margin-bottom: 25px; font-weight: 800; font-size: 1.3rem; min-height: 70px; display: flex; align-items: center; justify-content: center; }
+.controls { display: flex; flex-direction: column; gap: 15px; }
+.bet-input-group { display: flex; gap: 15px; height: 60px; }
+.bet-wrapper { flex: 1; display: flex; align-items: center; background: rgba(0,0,0,0.5); border-radius: 12px; border: 2px solid #5A2A82; padding: 0 15px; }
+.bet-wrapper label { font-size: 1.2rem; font-weight: bold; color: #ddd; margin-right: 15px; }
+.bet-wrapper input { flex: 1; background: transparent; border: none; color: white; font-size: 1.5rem; font-weight: 900; text-align: right; }
+
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(5px); }
+.modal.active { display: flex; animation: fadeIn 0.3s; }
+.modal-content { background: linear-gradient(145deg, #2b0d17, #120308); padding: 50px 40px; border-radius: 25px; border: 3px solid #ff003c; text-align: center; max-width: 550px; box-shadow: 0 0 50px rgba(255,0,60,0.3); }
+.modal-content h2 { color: #ff003c; margin-bottom: 25px; font-size: 2.5rem; font-weight: 900; }
+.quote-text { margin-bottom: 35px; font-size: 1.2rem; line-height: 1.6; color: #ddd; font-style: italic; }
+.jackpot-display { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: #FFCC00; color: #000; padding: 5px 40px; border-radius: 25px; font-weight: 900; font-size: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; }
+.jackpot-display.show { opacity: 1; animation: jackpotPop 0.5s ease-out forwards; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulseWin { from { filter: brightness(1); } to { filter: brightness(1.3); } }
+@keyframes blurSpin { 0% { filter: blur(0px); transform: translateY(0); } 50% { filter: blur(6px); transform: translateY(20px); } 100% { filter: blur(0px); transform: translateY(0); } }
+.spinning { animation: blurSpin 0.08s infinite; color: transparent !important; background: #bbb !important; box-shadow: inset 0 0 20px rgba(0,0,0,0.5) !important; }
+@keyframes jackpotPop { 0% { transform: translate(-50%, 20px) scale(0.5); opacity: 0; } 100% { transform: translate(-50%, -10px) scale(1.1); opacity: 1; } }
+
+@media (max-width: 768px) {
+    .header { flex-direction: column; gap: 10px; font-size: 1.2rem; }
+    .slot-grid { gap: 8px; padding: 10px; }
+    .slot-cell { height: 60px; font-size: 35px; border-radius: 8px; box-shadow: 0 4px 0 #ccc; }
+    .bet-input-group { flex-direction: column; height: auto; }
+    .machine-container { padding: 15px; }
+}
+
+/* =========================================
+   BARU: ANIMASI JACKPOT (KOIN JATUH)
+   ========================================= */
+
+/* Kontainer utama untuk koin-koin (harus di atas semua layar) */
+.coin-shower-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Biar gak ngeblok klik tombol */
+    z-index: 999; /* Di bawah modal tapi di atas mesin game */
+    overflow: hidden;
+}
+
+/* Gaya dasar elemen koin/uang */
+.falling-coin {
+    position: absolute;
+    top: -100px; /* Start di atas luar layar */
+    font-size: 2.5rem;
+    user-select: none;
+    opacity: 0;
+    animation: fallAnimation linear forwards;
+}
+
+/* Animasi jatuh ke bawah */
+@keyframes fallAnimation {
+    0% {
+        top: -100px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* Muncul perlahan pas mulai jatuh */
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 110vh; /* Jatuh sampai bawah luar layar */
+        /* Rotate dan Translate diacak via JS */
+        opacity: 0; /* Hilang pas sampai bawah */
+    }
+}

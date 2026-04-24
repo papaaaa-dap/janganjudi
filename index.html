@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Simulator Pro - Edukasi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-screen" class="screen active">
+        <div class="login-box">
+            <h1>🎰 Slot Simulator</h1>
+            <p>Simulasi 5x6. Murni hiburan, tanpa uang asli.</p>
+            
+            <div class="input-group">
+                <label for="username">Nama Pemain</label>
+                <input type="text" id="username" placeholder="Masukkan nama Anda" autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <label for="initial-balance">Pilih Saldo Virtual</label>
+                <select id="initial-balance">
+                    <option value="10000">Rp 10.000</option>
+                    <option value="50000">Rp 50.000</option>
+                    <option value="100000">Rp 100.000</option>
+                    <option value="500000">Rp 500.000</option>
+                    <option value="1000000">Rp 1.000.000</option>
+                    <option value="5000000">Rp 5.000.000</option>
+                    <option value="10000000">Rp 10.000.000</option>
+                </select>
+            </div>
+            
+            <button id="btn-start" class="btn-3d btn-primary">MASUK KE GAME</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="header">
+            <div class="user-info">👤 <span id="display-user">Player</span></div>
+            <div class="balance-info">💰 Saldo: <span id="display-balance" class="glow-text">0</span></div>
+        </div>
+
+        <div class="machine-container">
+            <div class="jackpot-display" id="jackpot-display">JACKPOT!</div>
+            
+            <div class="slot-grid" id="slot-grid">
+                </div>
+
+            <div class="message-board" id="message-board">
+                Silakan tentukan taruhan dan tekan SPIN!
+            </div>
+
+            <div class="controls">
+                <div class="bet-input-group">
+                    <div class="bet-wrapper">
+                        <label for="bet-amount">Taruhan</label>
+                        <input type="number" id="bet-amount" value="1000" min="100">
+                    </div>
+                    <button id="btn-all-in" class="btn-3d btn-secondary">MAX BET</button>
+                </div>
+                <button id="btn-spin" class="btn-3d btn-spin-action">🎰 SPIN</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bankrupt-modal" class="modal">
+        <div class="modal-content">
+            <h2>⚠️ SALDO HABIS ⚠️</h2>
+            <p id="motivational-message" class="quote-text">Sistem selalu dirancang untuk menang. Jadikan ini pelajaran untuk tidak mencoba yang asli.</p>
+            <button id="btn-restart" class="btn-3d btn-primary">Kembali ke Menu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
